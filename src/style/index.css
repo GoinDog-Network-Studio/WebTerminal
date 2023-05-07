@@ -1,0 +1,30 @@
+body {
+    background: black;
+    color: white;
+}
+#mouse {
+    content: "";
+    width: 3px;
+    height: 15px;
+    background: white;
+    float: left;
+    margin-left: 3px;
+}
+#code_input code {
+    float: left;
+}
+#ip_cmd {
+    float: left;
+}
+#code_input {
+    display: inline;
+}
+#code_ip_ code {
+    float: left;
+}
+#ip_cmd {
+    float: left;
+}
+#code_ip_ {
+    display: inline;
+}
