@@ -65,6 +65,7 @@ function Http(param) {
     http.open(meth, url);
     http.send();
     http.onload = (ev) => {
+        console.log(http.response);
         return http.response;
     }
 }
