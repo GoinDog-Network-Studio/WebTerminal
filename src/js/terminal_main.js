@@ -4,12 +4,13 @@ console.log = (logText) => {
     document.getElementById("br_div").innerHTML += "<br /><code>" + logText + "</code>"
 }
 
-function loadCommands(cmd_name, source = "https://source.wooworg.top/terminal/") {
+function loadCommands(cmd_name, source = "https://source.goindog.cn/terminal/") {
     let request = new XMLHttpRequest();
-    request.open("GET", source);
+    request.open("GET", source + cmd_name);
     switch (request.status) {
         case 200:
             console.log("GET " + source + " SUCCESS!");
+            eval(request.responseText);
             break;
         default:
             console.log("Bad Connection:" + request.status);
