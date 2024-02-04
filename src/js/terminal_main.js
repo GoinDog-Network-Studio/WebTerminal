@@ -4,13 +4,13 @@ console.log = (logText) => {
     document.getElementById("br_div").innerHTML += "<br /><code>" + logText + "</code>"
 }
 
-function loadCommands(cmd_name, source = "https://source.goindog.cn/terminal/") {
+function loadCommands(packageName, source = "https://source.goindog.cn/terminal/") {
     let request = new XMLHttpRequest();
     request.addEventListener("load",() => {
-        console.oldLog("GET " +  source + cmd_name + ".js" + " SUCCESS!");
+        console.oldLog("GET " +  source + packageName + ".js" + " SUCCESS!");
       
     })
-    request.open("GET", source + cmd_name + ".js");
+    request.open("GET", source + packageName + ".js");
     request.send();
 }
 
@@ -19,7 +19,7 @@ function runCommand(commandName = "", Attribute = []) {
     try {
         eval(command_run_str);
     } catch (e) {
-        console.log("Unknow command:" + commandName);
+        console.log("Unknown command:" + commandName);
     }
     document.getElementById("code_input").setAttribute("id", "code_ip_");
     document.getElementById("ip_cmd").setAttribute("id", "ip_cmd_");
@@ -44,7 +44,7 @@ window.onload = () => {
             } else if (ev.key === "Backspace") {
                 document.getElementById("ip_cmd").innerText = document.getElementById("ip_cmd").innerText.substring(0, document.getElementById("ip_cmd").innerText.length - 1);
             } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp" || ev.key === "ArrowDown" || ev.key === "ArrowRight") {
-            } else if (ev.keyCode === 32) {
+            } else if (ev.code === "Space") {
                 document.getElementById("ip_cmd").innerHTML += "&nbsp;";
             } else if (ev.key === "CapsLock" || ev.metaKey || ev.key === "Tab" || ev.ctrlKey || ev.altKey || ev.shiftKey || ev.key === "Unidentified" || ev.key === "AudioVolumeMute" || ev.key === "AudioVolumeDown" || ev.key === "AudioVolumeUp" || ev.key === "MediaTrackPrevious" || ev.key === "MediaTrackNext" || ev.key === "MediaPlayPause" || ev.key === "Delete" || ev.key === "NumLock" || ev.key === "Home" || ev.key === "PageUp" || ev.key === "End" || ev.key === "PageDown" || ev.key === "Insert") {
             } else {
