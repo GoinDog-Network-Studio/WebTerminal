@@ -4,13 +4,19 @@ console.log = (logText) => {
     document.getElementById("br_div").innerHTML += "<br /><code>" + logText + "</code>"
 }
 
-function loadCommands(packageName, source = "https://source.goindog.cn/terminal/") {
+function loadCommands(package_, source = "https://source.goindog.cn/terminal/") {
+    let packages = package_.split(':');
+    let packagePath = packages[0].replaceAll(".", "/");
+    let packageName = packages[1];
+    let url = source + packagePath + "/" + packageName + "/" + packages[2] + ".js"
     let request = new XMLHttpRequest();
     request.addEventListener("load",() => {
-        console.oldLog("GET " +  source + packageName + ".js" + " SUCCESS!");
-      
+        console.oldLog("GET " +  url + " SUCCESS!");
     })
-    request.open("GET", source + packageName + ".js");
+    request.addEventListener("error", () => {
+        console.log("GET " + url + " ERROR")
+    })
+    request.open("GET", url + ".js");
     request.send();
 }
 
@@ -46,10 +52,10 @@ window.onload = () => {
             } else if (ev.key === "ArrowLeft" || ev.key === "ArrowUp" || ev.key === "ArrowDown" || ev.key === "ArrowRight") {
             } else if (ev.code === "Space") {
                 document.getElementById("ip_cmd").innerHTML += "&nbsp;";
-            } else if (ev.key === "CapsLock" || ev.metaKey || ev.key === "Tab" || ev.ctrlKey || ev.altKey || ev.shiftKey || ev.key === "Unidentified" || ev.key === "AudioVolumeMute" || ev.key === "AudioVolumeDown" || ev.key === "AudioVolumeUp" || ev.key === "MediaTrackPrevious" || ev.key === "MediaTrackNext" || ev.key === "MediaPlayPause" || ev.key === "Delete" || ev.key === "NumLock" || ev.key === "Home" || ev.key === "PageUp" || ev.key === "End" || ev.key === "PageDown" || ev.key === "Insert") {
+            } else if (ev.key === "CapsLock" || ev.metaKey || ev.key === "Tab" || ev.ctrlKey || ev.altKey || ev.shiftKey || ev.key === "Unidentified" || ev.key === "AudioVolumeMute" || ev.key === "AudioVolumeDown" || ev.key === "AudioVolumeUp" || ev.key === "MediaTrackPrevious" || ev.key === "MediaTrackNext" || ev.key === "MediaPlayPause" || ev.key === "Delete" || ev.key === "NumLock" || ev.key === "Home" || ev.key === "PageUp" || ev.key === "End" || ev.key === "PageDown" || ev.key === "Insert" || ev.key === "F1" || ev.key === "F2" || ev.key === "F3" || ev.key === "F4" || ev.key === "F5" || ev.key === "F6" || ev.key === "F7" || ev.key === "F8" || ev.key === "F9" || ev.key === "F10" || ev.key === "F11" || ev.key === "F12") {
             } else {
                 document.getElementById("ip_cmd").innerText += ev.key
             }
     });
-    loadCommands("common");
+    loadCommands("cn.goindog.commons:commons-io:0.2");
 }
