@@ -1,4 +1,5 @@
 console.oldLog = console.log;
+let command_list = [];
 console.log = (logText) => {
     console.oldLog(logText);
     document.getElementById("br_div").innerHTML += "<br /><code>" + logText + "</code>"
@@ -12,17 +13,20 @@ function loadCommands(package_, source = "https://source.goindog.cn/terminal/") 
     let request = new XMLHttpRequest();
     request.addEventListener("load",() => {
         console.oldLog("GET " +  url + " SUCCESS!");
+        eval(request.responseText);
     })
     request.addEventListener("error", () => {
         console.log("GET " + url + " ERROR")
     })
-    request.open("GET", url + ".js");
+    request.open("GET", url);
     request.send();
 }
 
 function runCommand(commandName = "", Attribute = []) {
     let command_run_str = `${commandName}(${JSON.stringify(Attribute)})`
     try {
+        console.log(command_run_str);
+        
         eval(command_run_str);
     } catch (e) {
         console.log("Unknown command:" + commandName);
@@ -46,6 +50,8 @@ window.onload = () => {
                 let list = document.getElementById("ip_cmd").innerText.split(/\s+/);
                 let name = list[0];
                 let attr = list.slice(1, list.length);
+    var len = command_list.length;
+    command_list[len] = document.getElementById("ip_cmd").innerText;
                 runCommand(name, attr);
             } else if (ev.key === "Backspace") {
                 document.getElementById("ip_cmd").innerText = document.getElementById("ip_cmd").innerText.substring(0, document.getElementById("ip_cmd").innerText.length - 1);
@@ -57,5 +63,5 @@ window.onload = () => {
                 document.getElementById("ip_cmd").innerText += ev.key
             }
     });
-    loadCommands("cn.goindog.commons:commons-io:0.1.1");
+    loadCommands("cn.goindog.commons:commons-io:0.1.1", "./src/sources/mirror/");
 }
