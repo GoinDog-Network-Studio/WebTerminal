@@ -63,5 +63,5 @@ window.onload = () => {
                 document.getElementById("ip_cmd").innerText += ev.key
             }
     });
-    loadCommands("cn.goindog.commons:commons-io:0.1.1", "/src/sources/mirror/");
+    loadCommands("cn.goindog.commons:commons-io:0.1.1", "./src/sources/mirror/");
 }
