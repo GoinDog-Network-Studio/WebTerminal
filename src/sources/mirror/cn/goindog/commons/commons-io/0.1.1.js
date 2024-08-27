@@ -11,6 +11,10 @@ if (window.localStorage.getItem("files") == null) {
     files = window.localStorage.getItem("files")
 }
 
-let ls = function() {
+let ls = function([]) {
     console.log(files);
+}
+
+let help = function([]) {
+    console.log("Help command was runned")
 }
